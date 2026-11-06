@@ -22,10 +22,16 @@ import turnbough.transactions.services.TransactionService;
 @RequestMapping("api/transactions")
 public class TransactionController
 {
+	/*
+	* Variables
+	 */
 	private final TransactionService transactionService;
 	private static final Logger log = LogManager.getLogger(TransactionController.class);
 
 
+	/*
+	* Constructors
+	 */
 	/**
 	 * Constructor.
 	 *
@@ -36,9 +42,9 @@ public class TransactionController
 		this.transactionService = transactionService;
 	}
 
-	//*****
-	// Get Mapping
-	//*****
+	/*
+	* Get Mapping
+	 */
 	/**
 	 * Retrieve a range of transactions. Defaulted to the last 20 transactions.
 	 *
@@ -68,9 +74,9 @@ public class TransactionController
 
 	}
 
-	//*****
-	// Post Mapping
-	//*****
+	/*
+	* Post Mapping
+	 */
 	/**
 	 * Adds a transaction record to the database.
 	 *
@@ -85,9 +91,9 @@ public class TransactionController
 		return new ResponseEntity<>(savedTransaction, HttpStatus.CREATED);
 	}
 
-	//*****
-	// Put Mapping
-	//*****
+	/*
+	* Put Mapping
+	 */
 	/**
 	 * Updates an existing transaction in the database.
 	 *
@@ -105,15 +111,15 @@ public class TransactionController
 		return new ResponseEntity<>(updatedTransaction, HttpStatus.OK);
 	}
 
-	//*****
-	// Delete Mapping
-	//*****
+	/*
+	* Delete Mapping
+	 */
 	/**
 	 * Removes a transaction from the database with the given ID.
 	 *
 	 * @param transactionId The ID of the transaction to be removed from the database.
 	 */
-	@DeleteMapping("/{transactionId}")
+	@DeleteMapping("/delte/{transactionId}")
 	public ResponseEntity<Void> deleteTransaction(@PathVariable Long transactionId)
 	{
 		transactionService.deleteTransaction(transactionId);
@@ -121,6 +127,31 @@ public class TransactionController
 		return ResponseEntity.noContent().build();
 	}
 
-	//TODO: Delete all
+	/**
+	 *
+	 *
+	 * @return
+	 */
+	public ResponseEntity<Void> deleteAll()
+	{
+		transactionService.deleteAllTransactions();
+
+		return ResponseEntity.noContent().build();
+	}
+
+	/**
+	 *
+	 *
+	 * @param accountId
+	 * @return
+	 */
+	@DeleteMapping("/delete/all/{accountId}")
+	public ResponseEntity<Void> deleteAllTransactionsByAccountId(@PathVariable Long accountId)
+	{
+		transactionService.deleteTransactionByAccount(accountId);
+
+		return ResponseEntity.noContent().build();
+	}
+
 
 }

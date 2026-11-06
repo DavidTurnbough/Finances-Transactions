@@ -130,4 +130,14 @@ public class TransactionService
 
 		transactionRepository.deleteById(transactionId);
 	}
+
+	public void deleteAllTransactions()
+	{
+		//TODO: Delete all transactions
+	}
+
+	public void deleteTransactionByAccount(Long accountId)
+	{
+		//TODO: Delete all transactions by account id
+	}
 }
